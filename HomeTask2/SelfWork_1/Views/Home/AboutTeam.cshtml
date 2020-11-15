@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "AboutTeam";
+}
+@using Comment.BLL.Models
+@model IEnumerable<PlayerDTO>
+<div style="margin-top:25px;height:70%">
+    <div id="carouselExampleCaptions" class="carousel slide justify-content-center m-auto" data-ride="carousel" style="margin-top:5%;">
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < Model.ToList().Count; i++)
+            {
+                if (i == 0)
+                {
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                }
+                else
+                {
+                    <li data-target="#carouselExampleCaptions" data-slide-to="i"></li>
+                }
+            }
+        </ol>
+        @if (Model.ToList().Count != 0)
+        {
+            <div class="carousel-inner m-auto" style="width:60%;height:40%;border-radius:3px;">
+                @for (int i = 0; i < Model.ToList().Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        <div class="carousel-item active">
+                            <div style="display:flex;">
+                                <img class="d-block w-50" src="@Model.ToList()[i].ImagePath" style="justify-content:start;overflow:hidden;border-radius:15px">
+                                <form style="justify-content:end;background:#fff;padding:50px;border-radius:15px;">
+                                    <p><b>@Resources.HomeController.Birthday:</b> @Model.ToList()[i].Bithday.ToShortDateString() (@(DateTime.Now.Year - Model.ToList()[i].Bithday.Year) @Resources.HomeController.Years)</p>
+                                    <p><b>@Resources.HomeController.Name:</b> @Model.ToList()[i].Name</p>
+                                    <p><b>@Resources.HomeController.Surname:</b> @Model.ToList()[i].Surname</p>
+                                    <p><b>@Resources.HomeController.Position:</b> @Model.ToList()[i].Position</p>
+                                    <p><b>@Resources.HomeController.Command:</b> @Model.ToList()[i].CommandName</p>
+                                    <p><b>@Resources.HomeController.Height:</b> @Model.ToList()[i].Height</p>
+                                    <p><b>@Resources.HomeController.Weight:</b> @Model.ToList()[i].Weight</p>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="carousel-item">
+                            <div style="display:flex;">
+                                <img class="d-block w-50" src="@Model.ToList()[i].ImagePath" style="justify-content:start;overflow:hidden;border-radius:15px">
+                                <form style="justify-content:end;background:#fff;padding:50px;border-radius:15px">
+                                    <p><b>@Resources.HomeController.Birthday:</b> @Model.ToList()[i].Bithday.ToShortDateString() (@(DateTime.Now.Year - Model.ToList()[i].Bithday.Year) @Resources.HomeController.Years)</p>
+                                    <p><b>@Resources.HomeController.Name:</b> @Model.ToList()[i].Name</p>
+                                    <p><b>@Resources.HomeController.Surname:</b> @Model.ToList()[i].Surname</p>
+                                    <p><b>@Resources.HomeController.Position:</b> @Model.ToList()[i].Position</p>
+                                    <p><b>@Resources.HomeController.Command:</b> @Model.ToList()[i].CommandName</p>
+                                    <p><b>@Resources.HomeController.Height:</b> @Model.ToList()[i].Height</p>
+                                    <p><b>@Resources.HomeController.Weight:</b> @Model.ToList()[i].Weight</p>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true" style="color:black"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true" style="color:black"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>

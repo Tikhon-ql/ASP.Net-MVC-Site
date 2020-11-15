@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Comment";
+}
+@using Comment.BLL.Models;
+@model IEnumerable<CommentDTO>
+<style>
+    main{
+        margin:auto;
+        position:relative;
+    }
+    .comment {
+        position: absolute;
+        right:0;
+        top:25px;
+    }
+    ol{
+        margin-top:25px;
+        background:white;
+        border-radius:10px;
+        padding:50px;
+        list-style:none;
+        position:absolute;
+        overflow:hidden;
+    }
+    ol li{
+        background:gray;
+        padding:7px;
+        border-radius:5px;
+        margin:10px;
+    }
+</style>
+<main class="col">
+    @*@if(ViewBag.Error != "1")
+    {
+        <script>
+            alert(@ViewBag.Error);
+        </script>
+    }*@
+    @if (Model.ToList().Count != 0)
+    {
+        <ol>
+            <h2>@Resources.HomeController.Comments</h2>
+            @foreach(CommentDTO item in Model)
+            {
+                <li>
+                    <div style="justify-content:start;">
+                        <p>@item.Nickname: @item.Text</p>
+                        <p>@item.Date</p>
+                    </div>
+                </li>
+            }
+        </ol>
+    }
+    <div class="comment">
+        <p style="color:white;font-size:15px;font-weight:100;padding-right:150px;width:350px">@Resources.HomeController.WriteAComment</p>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            @Html.Hidden("Date", Model.ToList().Count + 1);
+    <div class="input-group flex-nowrap bg-transparent" style="margin:auto;">
+        <div class="input-group-prepend bg-transparent">
+            <span class="input-group-text bg-transparent" id="addon-wrapping" style="color:white">N</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Nickname" aria-label="Nickname" aria-describedby="addon-wrapping" name="Nickname" required>
+    </div>
+            <textarea class="bg-transparent " name="Text" style="margin-top:2%;border-radius:5px;width:60%;height:120px;border-color:white;color:white;" required></textarea><hr style="border-color:white;">
+            <input type="submit" style="margin:10px;" value="@Resources.HomeController.Submit"/>
+        }
+    </div>
+</main>

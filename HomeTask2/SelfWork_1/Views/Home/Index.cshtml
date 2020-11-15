@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Styles.Render("~/Content/css")
+<style>
+    * {
+        font-family: Calibri;
+    }
+
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        display: none;
+    }
+
+    main {
+        background-color: #AAF0D1;
+        margin: auto;
+        width: 80%;
+        margin-top: 50px;
+        border-radius: 10px;
+        margin-bottom: 50px;
+    }
+
+    .navbar {
+        background: rgba(0,0,0,0.5);
+    }
+
+    .video {
+        position: relative;
+        padding-bottom: 56.25%;
+        z-index: 1;
+    }
+
+    .video_media {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .intro {
+        max-height: 100vh;
+        overflow: hidden;
+        position: relative;
+    }
+
+        .intro:after {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            content: "";
+            display: block;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background-color: rgba(0,0,0,0.01);
+        }
+
+    .intro_content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        width: 100%;
+        height: 100%;
+    }
+
+    ._container {
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .intro_title {
+        color: #ffffff;
+        margin: 0;
+        text-align: center;
+        margin-top: 15%;
+        font-size: 50px;
+        padding: 50px;
+    }
+
+    .aboutTime {
+        background-image: url("../../Content/images/Background/AboutTimeFone.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<div class="intro">
+    <div class="video">
+        <video src="~/Content/videos/KobeBryant.mp4" autoplay muted loop class="video_media"></video>
+    </div>
+    <div class="intro_content">
+        <div class="_container">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black;">
+                <a class="navbar-brand" href="~/Home/Index" style="font-size:15px; margin-bottom:12px;margin-left:4.5%;color:white;">
+                    <img src="~/Content/images/Background/ball.png" style="width:50px;height:50px;" />
+                </a>
+                <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse float-right" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item navli col">
+                            <a class="nav-link active " href="~/Home/Index" style="font-size:15px; color:white;width:75px">@Resources.HomeController.AboutUs<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown col">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white;">
+                                @Resources.HomeController.Contacts
+                            </a>
+                            <div class="dropdown-menu border-0" aria-labelledby="navbarDropdown" style="margin:0;background-color: black;">
+                                <a class="dropdown-item " href="https://www.vk.com" style="color: white;">
+                                    <img src="~/Content/images/icons/vk.png" style="width:25px;height:25px;" /> @Resources.HomeController.Vk
+                                </a>
+                                <a class="dropdown-item " style="color: white;" href="https://www.instagram.com/lakers"><img src="~/Content/images/icons/instagram.png" style="width:25px;height:25px;" />  @Resources.HomeController.Instagram</a>
+                                <a class="dropdown-item " style="color: white;" href="https://www.facebook.com"><img src="~/Content/images/icons/facebook.png" style="width:25px;height:25px;" /> @Resources.HomeController.Facebook</a>
+                            </div>
+                        </li>
+                        <li class="nav-item col">
+                            <a class="nav-link active" href="~/Home/Index" style="font-size:15px; margin-bottom:12px;color:white;">@Resources.HomeController.Services</a>
+                        </li>
+                        <li class="nav-item col">
+                            <a class="nav-link active " href="~/Home/Comment" style="font-size:15px;color:white;">@Resources.HomeController.Comments</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="intro_title">
+                <a class="btn btn-dark bg-transparent" href="~/Home/AboutTeam" style="border-radius:50px;padding:25px 50px 25px 50px;font-size:35px" id="title"></a>
+            </div>
+            @using (Html.BeginForm("ChangeCulture", "Home"))
+            {
+                <select name="lang">
+                    <option value="ru">Русский</option>
+                    <option value="en">English</option>
+                </select>
+                <input type="submit" name="submit" value="@Resources.HomeController.Submit">
+            };
+        </div>
+    </div>
+
+</div>
+@*"LA Lakers won the nba 2020 tournament"*@
+<script type="text/javascript">
+    function animateText(id, text, i) {
+        let elem = document.getElementById(id);
+        console.dir(elem);
+        elem.innerHTML = text.substring(0, i);
+        i++;
+        setTimeout("animateText('" + id + "','" + text + "'," + i + ")", 100);
+    }
+    document.body.onload = animateText("title","@(Resources.HomeController.LaWin)", 0);
+    $(document).ready(function () {
+        var body = $("body");
+        body.fadeIn(400);
+        $(document).on("click", "a:not([href^='#']):not([href^='tel']):not([href^='mailto'])", function (e) {
+            e.preventDefault();
+            $(body).fadeOut(400);
+            var self = this;
+            setTimeout(function () {
+                window.location.href = $(self).attr("href");
+            }, 400);
+        });
+    });
+</script>
